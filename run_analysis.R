@@ -32,6 +32,8 @@ sub_train <- read.table(paste0(data_folder, "train/subject_train.txt"),
                         header = FALSE, col.names = c("subject"))
 sub_test  <- read.table(paste0(data_folder, "test/subject_test.txt"),
                         header = FALSE, col.names = c("subject"))
+# Use the variable names from "features.txt" for now. These get mangled
+# (e.g. "()" becomes ".."), but better than nothing.
 X_train   <- read.table(paste0(data_folder, "train/X_train.txt"),
                         header = FALSE, col.names = feature_labels$label)
 X_test    <- read.table(paste0(data_folder, "test/X_test.txt"),
@@ -41,13 +43,20 @@ y_train   <- read.table(paste0(data_folder, "train/y_train.txt"),
 y_test    <- read.table(paste0(data_folder, "test/y_test.txt"),
                         header = FALSE, col.names = c("activity"))
 
-raw_data <- rbind(cbind(sub_train, X_train, y_train),
-                  cbind(sub_test,  X_test,  y_test))
+# Keep the feature varibles in front, so the column numbers are still the
+# ones from "features.txt".
+raw_data <- rbind(cbind(X_train, sub_train, y_train),
+                  cbind(X_test,  sub_test,  y_test))
 
 # Step 2
 # Extracts only the measurements on the mean and standard deviation
 # for each measurement. 
 # =================================================================
+
+mean_column_nos <- grep("mean", feature_labels$label, value = FALSE)
+std_column_nos  <- grep("std",  feature_labels$label, value = FALSE)
+smaller_data <- raw_data[, c(mean_column_nos, std_column_nos,
+                             match(c("subject", "activity"), names(raw_data)))]
 
 # Step 3
 # Uses descriptive activity names to name the activities in the data set.
