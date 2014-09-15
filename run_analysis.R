@@ -1,6 +1,7 @@
 # Step 0
 # Anything not explicitly mentioned in the assignment.
 # ====================================================
+library(dplyr)
 
 # File names
 remote_url <- paste0("https://d396qusza40orc.cloudfront.net/",
@@ -18,8 +19,8 @@ if (!file.exists(data_folder)) {
 
 # Load all the data labels
 activity_labels <- read.table(paste0(data_folder, "activity_labels.txt"),
-                              header = FALSE, stringsAsFactors = FALSE,
-                              col.names = c("level", "label"))
+                              header = FALSE, stringsAsFactors = TRUE,
+                              col.names = c("activity_code", "activity"))
 feature_labels <- read.table(paste0(data_folder, "features.txt"),
                              header = FALSE, stringsAsFactors = FALSE,
                              col.names = c("col_number", "label"))
@@ -39,14 +40,14 @@ X_train   <- read.table(paste0(data_folder, "train/X_train.txt"),
 X_test    <- read.table(paste0(data_folder, "test/X_test.txt"),
                         header = FALSE, col.names = feature_labels$label)
 y_train   <- read.table(paste0(data_folder, "train/y_train.txt"),
-                        header = FALSE, col.names = c("activity"))
+                        header = FALSE, col.names = c("activity_code"))
 y_test    <- read.table(paste0(data_folder, "test/y_test.txt"),
-                        header = FALSE, col.names = c("activity"))
+                        header = FALSE, col.names = c("activity_code"))
 
 # Keep the feature varibles in front, so the column numbers are still the
 # ones from "features.txt".
-raw_data <- rbind(cbind(X_train, sub_train, y_train),
-                  cbind(X_test,  sub_test,  y_test))
+step1_data <- rbind(cbind(X_train, sub_train, y_train),
+                    cbind(X_test,  sub_test,  y_test))
 
 # Step 2
 # Extracts only the measurements on the mean and standard deviation
@@ -55,12 +56,19 @@ raw_data <- rbind(cbind(X_train, sub_train, y_train),
 
 mean_column_nos <- grep("mean", feature_labels$label, value = FALSE)
 std_column_nos  <- grep("std",  feature_labels$label, value = FALSE)
-smaller_data <- raw_data[, c(mean_column_nos, std_column_nos,
-                             match(c("subject", "activity"), names(raw_data)))]
+step2_data <- step1_data[, c(mean_column_nos, std_column_nos,
+                             match(c("subject", "activity_code"),
+                                   names(step1_data)))]
 
 # Step 3
 # Uses descriptive activity names to name the activities in the data set.
 # =======================================================================
+
+# Replace the "activity_code" column, by the corresponding name from
+# "activity_labels.txt".
+step3_data <- step2_data %>%
+    merge(activity_labels) %>%
+    select(-activity_code)
 
 # Step 4
 # Appropriately labels the data set with descriptive variable names.
