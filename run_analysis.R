@@ -56,9 +56,8 @@ step1_data <- rbind(cbind(X_train, sub_train, y_train),
 
 mean_column_nos <- grep("mean", feature_labels$label, value = FALSE)
 std_column_nos  <- grep("std",  feature_labels$label, value = FALSE)
-step2_data <- step1_data[, c(mean_column_nos, std_column_nos,
-                             match(c("subject", "activity_code"),
-                                   names(step1_data)))]
+step2_data <- step1_data %>%
+    select(mean_column_nos, std_column_nos, subject, activity_code)
 
 # Step 3
 # Uses descriptive activity names to name the activities in the data set.
