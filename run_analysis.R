@@ -9,10 +9,12 @@ local_zipfile <- "dataset.zip"
 data_folder <- "UCI HAR Dataset/"
 
 # Download and unzip data
-if (!file.exists(local_zipfile))
-    download.file(url = remote_url, destfile = local_zipfile, method = "wget")
-if (!file.exists(data_folder))
+if (!file.exists(data_folder)) {
+    if (!file.exists(local_zipfile))
+        download.file(url = remote_url, destfile = local_zipfile,
+                      method = "wget")
     unzip(local_zipfile)
+}
 
 # Load all the data labels
 activity_labels <- read.table(paste0(data_folder, "activity_labels.txt"),
