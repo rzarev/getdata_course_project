@@ -20,7 +20,7 @@ activity_labels <- read.table(paste0(data_folder, "activity_labels.txt"),
                               col.names = c("level", "label"))
 feature_labels <- read.table(paste0(data_folder, "features.txt"),
                              header = FALSE, stringsAsFactors = FALSE,
-                             col.names = c("col_number", "labe"))
+                             col.names = c("col_number", "label"))
 
 # Step 1
 # Merges the training and the test sets to create one data set.
