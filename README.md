@@ -9,7 +9,7 @@ The repository contains the following files:
 
 *   `run_analysis.R` R script which processes the raw data.
 *   `CodeBook.md` Description of output data format.
-*   `Readme.md` This file.
+*   `README.md` This file.
 
 In addition, running the script `run_analysis.R` will produce two output files:
 
