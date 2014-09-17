@@ -54,8 +54,9 @@ step1_data <- rbind(cbind(X_train, sub_train, y_train),
 # for each measurement. 
 # =================================================================
 
-mean_column_nos <- grep("mean", feature_labels$label, value = FALSE)
-std_column_nos  <- grep("std",  feature_labels$label, value = FALSE)
+mean_column_nos <- grep("mean\\(\\)|meanFreq\\(\\)",
+                        feature_labels$label, value = FALSE)
+std_column_nos  <- grep("std\\(\\)",  feature_labels$label, value = FALSE)
 step2_data <- step1_data %>%
     select(mean_column_nos, std_column_nos, subject, activity_code)
 
