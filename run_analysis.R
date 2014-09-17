@@ -115,3 +115,9 @@ step5_data <- step4_data %>%
     summarise_each(funs(mean))
 colnames(step5_data)[3:ncol(step5_data)] <-
     sub("$", "_avg", colnames(step5_data)[3:ncol(step5_data)])
+
+# Step 6
+# Write the results to disk.
+# ==========================
+write.table(step4_data, file = "combined_values.txt", row.names = FALSE)
+write.table(step5_data, file = "summary_values.txt", row.names = FALSE)
