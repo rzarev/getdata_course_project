@@ -110,3 +110,8 @@ colnames(step4_data)[1:(ncol(step4_data) - 2)] <- new_names
 # From the data set in step 4, creates a second, independent tidy data
 # set with the average of each variable for each activity and each subject.
 # =========================================================================
+step5_data <- step4_data %>%
+    group_by(subject, activity) %>%
+    summarise_each(funs(mean))
+colnames(step5_data)[3:ncol(step5_data)] <-
+    sub("$", "_avg", colnames(step5_data)[3:ncol(step5_data)])
