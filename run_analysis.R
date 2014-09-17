@@ -1,6 +1,7 @@
 # Step 0
 # Anything not explicitly mentioned in the assignment.
 # ====================================================
+library(magrittr)
 library(dplyr)
 
 # File names
@@ -73,6 +74,37 @@ step3_data <- step2_data %>%
 # Step 4
 # Appropriately labels the data set with descriptive variable names.
 # ==================================================================
+
+raw_names <- feature_labels$label[c(mean_column_nos, std_column_nos)]
+split_names <- strsplit(raw_names, split = "-")
+
+# We have two different patterns of names, for vector coords,
+# and for vector magnitudes. Standardize them as a data.frame.
+uniformize <- function(x) {
+    if (length(x) == 3)
+        x[c(1, 3, 2)]
+    else
+        c(sub("Mag", "", x[1]), "magnitude", x[2])
+}
+names_frame <- split_names %>%
+    lapply(uniformize) %>%
+    as.data.frame(col.names = NULL, stringsAsFactors = FALSE) %>%
+    t %>%
+    as.data.frame(row.names = NULL, stringsAsFactors = FALSE)
+colnames(names_frame) <- c("var", "coord", "fun")
+rownames(names_frame) <- NULL
+
+# Some features from "features.txt" have a typo. Fix them.
+names_frame$var <- sub("BodyBody", "Body", names_frame$var)
+
+# Strip bad characters.
+names_frame$fun <- sub("\\(\\)", "", names_frame$fun)
+
+# Combine all components.
+new_names <- with(names_frame, paste(var, coord, fun, sep="_"))
+
+step4_data <- step3_data
+colnames(step4_data)[1:(ncol(step4_data) - 2)] <- new_names
 
 # Step 5
 # From the data set in step 4, creates a second, independent tidy data
