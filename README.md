@@ -1,7 +1,7 @@
 ## README ##
 
 This is a submission for the Course Project for the "Getting and Cleaning Data"
-class on Coursera: http:///class.coursera.org/getdata-007.
+class on Coursera: <http:///class.coursera.org/getdata-007>.
 
 ---
 
@@ -127,4 +127,4 @@ a "sample". There are separate columns for each "measurement" of the "sample",
 i.e. the averages of the original features.
 
 Finally, to emphasize that these are averages of the features, we have appended
-"_avg" to the column names.
+`_avg` to the column names.

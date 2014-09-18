@@ -7,25 +7,25 @@ produced by running `run_analysis.R`.
 
 The original source for the data is:
 
->Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
->Smartlab - Non Linear Complex Systems Laboratory
->DITEN - UniversitÃ  degli Studi di Genova, Genoa I-16145, Italy.
->activityrecognition '@' smartlab.ws
->www.smartlab.ws
+>Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.  
+>Smartlab - Non Linear Complex Systems Laboratory  
+>DITEN - UniversitÃ  degli Studi di Genova, Genoa I-16145, Italy.  
+>activityrecognition '@' smartlab.ws  
+>www.smartlab.ws  
 
 via
 
->UCI Machine Learning Repository
->http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones#
+>UCI Machine Learning Repository  
+><http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones>  
 
 For more information on the original research producing the data, see:
 
 >**Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and
->Jorge L. Reyes-Ortiz.**
+>Jorge L. Reyes-Ortiz.**  
 >*Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly
->Support Vector Machine.*
->International Workshop of Ambient Assisted Living (IWAAL 2012).
->Vitoria-Gasteiz, Spain. Dec 2012
+>Support Vector Machine.*  
+>International Workshop of Ambient Assisted Living (IWAAL 2012).  
+>Vitoria-Gasteiz, Spain. Dec 2012  
 
 ---
 
