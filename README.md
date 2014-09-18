@@ -111,9 +111,10 @@ We have used the following unified naming convention for the features:
 These are joined together with underscores (as opposed to dashes, which also
 get mangled when used as column names).
 
-The vector measurement names were kept as is, because more descriptive names
-would be prohibitively long. The only exception is the correction of a typo,
-where in some places the substring `Body` had been accidentally doubled.
+We have also changed the `<vector measurement>` part of the name to be more
+reflective of the physical variable measured, rather than the sensor
+measurement it came from. See `CodeBook.md` for a complete description of
+the new names.
 
 ### Step 5 ###
 *From the data set in step 4, creates a second, independent tidy data

@@ -97,6 +97,13 @@ rownames(names_frame) <- NULL
 # Some features from "features.txt" have a typo. Fix them.
 names_frame$var <- sub("BodyBody", "Body", names_frame$var)
 
+# Change feature names to be closer to the physical variables
+# they are measuring, rather than the sensors that collected them.
+names_frame$var <- sub("AccJerk", "LinJerk", names_frame$var)
+names_frame$var <- sub("Acc", "LinAccel", names_frame$var)
+names_frame$var <- sub("BodyGyroJerk", "AngAccel", names_frame$var)
+names_frame$var <- sub("BodyGyro", "AngVelo", names_frame$var)
+
 # Strip bad characters.
 names_frame$fun <- sub("\\(\\)", "", names_frame$fun)
 
